@@ -3,10 +3,18 @@
 #include "clang/ASTMatchers/ASTMatchFinder.h"
 #include "clang/ASTMatchers/ASTMatchers.h"
 #include "clang/Basic/Version.h"
+#if __has_include("clang/Options/Options.h")
+#include "clang/Options/Options.h"
+#else
 #include "clang/Driver/Options.h"
+#endif
 #include "clang/Frontend/ASTConsumers.h"
 #include "clang/Frontend/FrontendActions.h"
+#if __has_include("clang/UnifiedSymbolResolution/USRGeneration.h")
+#include "clang/UnifiedSymbolResolution/USRGeneration.h"
+#else
 #include "clang/Index/USRGeneration.h"
+#endif
 #include "clang/Tooling/AllTUsExecution.h"
 #include "clang/Tooling/Tooling.h"
 #include "llvm/Support/Signals.h"
