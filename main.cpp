@@ -153,10 +153,6 @@ public:
     if (isCompilerGenerated(FD))
         return;
 
-    // ignore uses of declarations mentioned in a system header
-    if (SM->isInSystemHeader(FD->getSourceRange().getBegin()))
-      return;
-
     if (FD->isTemplateInstantiation()) {
       FD = FD->getTemplateInstantiationPattern();
       assert(FD);
@@ -185,9 +181,6 @@ public:
 
       auto Begin = F->getSourceRange().getBegin();
       if (Result.SourceManager->isInSystemHeader(Begin))
-        return;
-
-      if (!Result.SourceManager->isWrittenInMainFile(Begin))
         return;
 
       auto *MD = dyn_cast<CXXMethodDecl>(F);
